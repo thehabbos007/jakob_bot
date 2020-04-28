@@ -26,12 +26,13 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_gram, "~> 0.8.1"},
-      {:tesla, "~> 1.2"},
+      {:ex_gram, "~> 0.14.0"},
+      {:tesla, "~> 1.3.3"},
       {:gun, "~> 1.3"},
-      {:jason, "~> 1.1"},
+      {:jason, "~> 1.2"},
       {:persist, in_umbrella: true},
-      {:elixir_wit, "~> 2.0.0"}
+      {:elixir_wit, "~> 2.0.0"},
+      {:idna, "~> 6.0.0"}
       # {:sibling_app_in_umbrella, in_umbrella: true}
     ]
   end
