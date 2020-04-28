@@ -9,7 +9,7 @@ defmodule Bot.Application do
     token = ExGram.Config.get(:ex_gram, :token)
     children = [
       ExGram,
-      {Bot.Poller, [method: :polling, token: token]}
+      {Bot.Handler, [method: :polling, token: token]}
     ]
 
     opts = [strategy: :one_for_one, name: Bot.Supervisor]

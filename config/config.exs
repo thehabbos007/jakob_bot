@@ -6,10 +6,11 @@ config :persist, Persist.Repo,
   password: "postgres",
   hostname: "localhost"
 
+
 config :persist, ecto_repos: [Persist.Repo]
 
 
-config :tesla, adapter: Tesla.Adapter.Gun
+config :tesla, adapter: Tesla.Adapter.Mint
 config :tesla, Tesla.Middleware.Logger, debug: false
 
 config :bot, witai_key: {:system, "WITAI_TOKEN"}

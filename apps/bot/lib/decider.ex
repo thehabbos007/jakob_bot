@@ -14,7 +14,7 @@ defmodule Bot.Decider do
 
   defp decide_action({:weather_get}) do
     case Bot.Weather.get do
-      x when is_number(x) -> "It's #{x} degrees in the or something."
+      x when is_number(x) -> "It's #{x} degrees or sumtin."
       _ -> "Pls man i don't know :("
     end
   end
