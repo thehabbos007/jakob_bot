@@ -30,10 +30,11 @@ defmodule Bot.MixProject do
       {:tesla, "~> 1.3.3"},
       {:jason, "~> 1.2"},
       {:persist, in_umbrella: true},
-      {:elixir_wit, "~> 2.0.0"},
       {:castore, "~> 0.1.0"},
       {:mint, "~> 1.0"},
       {:cortex, "~> 0.6", only: [:dev, :test]},
+      {:alchemy, "~> 0.6.4", hex: :discord_alchemy},
+      {:porcelain, "~> 2.0"}
       # {:sibling_app_in_umbrella, in_umbrella: true}
     ]
   end

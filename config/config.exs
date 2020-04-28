@@ -16,4 +16,10 @@ config :tesla, Tesla.Middleware.Logger, debug: false
 config :bot, witai_key: {:system, "WITAI_TOKEN"}
 config :bot, weather_key: {:system, "WEATHER_TOKEN"}
 
-config :ex_gram, token: {:system, "TELEGRAM_TOKEN"}
+config :ex_gram, discord_token: {:system, "DISCORD_TOKEN"}
+config :ex_gram, telegram_token: {:system, "TELEGRAM_TOKEN"}
+
+
+config :alchemy,
+  ffmpeg_path: "/usr/bin/ffmpeg",
+  youtube_dl_path: "/usr/local/bin/youtube-dl"

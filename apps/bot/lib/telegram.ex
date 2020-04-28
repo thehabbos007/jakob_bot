@@ -1,4 +1,4 @@
-defmodule Bot.Handler do
+defmodule Bot.Telegram do
   @bot :jakob_bot
   use ExGram.Bot, name: @bot
 

@@ -1,4 +1,4 @@
-defmodule Bot.Weather do
+defmodule Bot.Ai.Weather do
   @moduledoc """
   OpenWeather wrapper
   """

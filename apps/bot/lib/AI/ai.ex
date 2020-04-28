@@ -1,4 +1,4 @@
-defmodule Bot.Ai do
+defmodule Bot.Ai.Ai do
   @moduledoc """
   Wit.ai wrapper
   """

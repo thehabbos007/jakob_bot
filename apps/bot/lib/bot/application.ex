@@ -4,15 +4,25 @@ defmodule Bot.Application do
   @moduledoc false
 
   use Application
+  use Supervisor
 
   def start(_type, _args) do
-    token = ExGram.Config.get(:ex_gram, :token)
+    telegram_token = ExGram.Config.get(:ex_gram, :telegram_token)
+    discord_token = ExGram.Config.get(:ex_gram, :discord_token)
     children = [
       ExGram,
-      {Bot.Handler, [method: :polling, token: token]}
+      {Bot.Telegram, [method: :polling, token: telegram_token]},
+      %{
+        id: Bot.Discord,
+        start: {Alchemy.Client, :start, [discord_token]}
+      }
     ]
 
     opts = [strategy: :one_for_one, name: Bot.Supervisor]
-    Supervisor.start_link(children, opts)
+    res = Supervisor.start_link(children, opts)
+
+    use Bot.Discord
+
+    res
   end
 end

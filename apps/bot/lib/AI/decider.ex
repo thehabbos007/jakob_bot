@@ -1,4 +1,4 @@
-defmodule Bot.Decider do
+defmodule Bot.Ai.Decider do
 
   @spec decide(
           {:reminder_remove}
