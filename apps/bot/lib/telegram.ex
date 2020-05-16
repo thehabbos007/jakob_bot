@@ -5,7 +5,7 @@ defmodule Bot.Telegram do
   @exclaim ~r/^jakob!/iu
   regex(@exclaim, :ai_msg)
 
-  @normal ~r/^jakob/iu
+  @normal ~r/^jakob,/iu
   regex(@normal, :normal)
 
 
@@ -30,12 +30,15 @@ defmodule Bot.Telegram do
 
   def handle({:regex, :ai_msg, msg}, ctx) do
     #ctx |> answer("Testerino back")
-    text = msg.text
+    text = msg.text |> String.replace(~r/^jakob!/iu, "")
+    "
     response = String.slice(text, 6..-1)
     |> Bot.Ai.analyse
     |> Bot.Ai.parse
     |> Bot.Decider.decide
-
+    "
+    {response, _} = Bot.Markov.Generator.complete_sentence(text)
+    {response, _} = if response == String.trim(text), do: Bot.Markov.Generator.create_sentence(), else: {response, :ok}
     answer(ctx, response, reply_to_message_id: msg.message_id)
   end
 

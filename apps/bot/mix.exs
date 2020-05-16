@@ -34,7 +34,8 @@ defmodule Bot.MixProject do
       {:mint, "~> 1.0"},
       {:cortex, "~> 0.6", only: [:dev, :test]},
       {:alchemy, "~> 0.6.4", hex: :discord_alchemy},
-      {:porcelain, "~> 2.0"}
+      {:porcelain, "~> 2.0"},
+      {:floki, "~> 0.26.0"}
       # {:sibling_app_in_umbrella, in_umbrella: true}
     ]
   end
