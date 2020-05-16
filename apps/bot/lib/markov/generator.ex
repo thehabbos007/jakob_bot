@@ -1,5 +1,5 @@
 defmodule Bot.Markov.Generator do
-  alias Bot.MarkovModel
+  alias Bot.Markov.Model
 
   def create_filtered_sentence(threshold \\ 0.5, maxtries \\ 50, tries \\ 0) do
     {sentence, probability} = create_sentence()
@@ -19,12 +19,12 @@ defmodule Bot.Markov.Generator do
   end
 
   def complete_sentence(sentence) when is_binary(sentence) do
-    complete_sentence(MarkovModel.tokenize(sentence), 0.0, 0.0)
+    complete_sentence(Model.tokenize(sentence), 0.0, 0.0)
   end
 
   def complete_sentence(tokens, prob_acc, tokens_added) when is_list(tokens) do
-    markov_state = MarkovModel.get_markov_state(tokens)
-    {new_token, prob} = MarkovModel.get_random_token(markov_state)
+    markov_state = Model.get_markov_state(tokens)
+    {new_token, prob} = Model.get_random_token(markov_state)
 
     if sentence_complete?(tokens, 5, 30) || new_token == '' do
       score = if tokens_added == 0 do

@@ -11,9 +11,19 @@ defmodule Bot.Telegram do
 
   require Logger
 
-  def handle({:text, msg, _meta}, ctx) do
-    #answer(ctx, msg)
-    nil
+  def handle({:text, msg, meta}, ctx) do
+    msg_id = extract_response_id(meta)
+
+    if Enum.random(0..100) >= 97 do
+      random_topic = msg
+      |> String.split
+      |> Enum.random
+
+      response = markov_empty_wrapper(random_topic)
+      answer(ctx, response, reply_to_message_id: msg_id)
+    else
+      nil
+    end
   end
 
   def handle({:regex, :normal, msg}, ctx) do
@@ -29,17 +39,17 @@ defmodule Bot.Telegram do
   end
 
   def handle({:regex, :ai_msg, msg}, ctx) do
-    #ctx |> answer("Testerino back")
+    msg_id = extract_response_id(msg)
     text = msg.text |> String.replace(~r/^jakob!/iu, "")
-    "
-    response = String.slice(text, 6..-1)
-    |> Bot.Ai.analyse
-    |> Bot.Ai.parse
-    |> Bot.Decider.decide
-    "
+
+    response = markov_empty_wrapper(text)
+    answer(ctx, response, reply_to_message_id: msg_id)
+  end
+
+  def markov_empty_wrapper(text) do
     {response, _} = Bot.Markov.Generator.complete_sentence(text)
     {response, _} = if response == String.trim(text), do: Bot.Markov.Generator.create_sentence(), else: {response, :ok}
-    answer(ctx, response, reply_to_message_id: msg.message_id)
+    response
   end
 
   def handle(msg, _), do: nil
