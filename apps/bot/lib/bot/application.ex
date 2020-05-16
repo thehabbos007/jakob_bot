@@ -9,9 +9,7 @@ defmodule Bot.Application do
   def start(_type, _args) do
     telegram_token = ExGram.Config.get(:ex_gram, :telegram_token)
     discord_token = ExGram.Config.get(:ex_gram, :discord_token)
-    {:ok, file} = File.read("apps/bot/test.html")
-    {:ok, doc} = Floki.parse_document(file)
-    input = Floki.find(doc, ".text") |> Enum.map(fn x -> Floki.text(x) end)
+    input = Persist.MarkovMessage.all()
 
     children = [
       ExGram,
